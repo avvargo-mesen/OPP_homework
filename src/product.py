@@ -7,3 +7,9 @@ class Product:
         self.description = description
         self.price = price
         self.quantity = quantity
+
+    @classmethod
+    def new_product(cls, one_product: dict) -> "Product":
+        product = cls(**one_product)
+        return product
+
