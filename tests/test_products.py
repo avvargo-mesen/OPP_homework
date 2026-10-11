@@ -1,4 +1,6 @@
 from src.product import Product
+from src.product import Smartphone
+from src.product import LawnGrass
 from src.category import Category
 import pytest
 
@@ -22,6 +24,18 @@ def second_pr():
 @pytest.fixture
 def first_ct(first_pr, second_pr):
     return Category("Электроника", "Ноутбуки и аксессуары", [first_pr, second_pr])
+
+@pytest.fixture
+def first_sm():
+    return Smartphone("Samsung", "Смартфон", 50000.0, 2, 5, "JA-700", 8, "gold")
+
+@pytest.fixture
+def second_sm():
+    return Smartphone("Readme", "Смартфон", 45000.0, 5, 4, "J-720", 16, "black")
+
+@pytest.fixture
+def first_lg():
+    return LawnGrass("Газонная трава", "Быстрорастущая", 500.0, 20, "Россия", "7 дней", "зелёный")
 
 
 def test_pr(first_pr):
@@ -85,3 +99,36 @@ def test_str_category(first_ct):
 
 def test_add(first_pr,second_pr):
     assert first_pr + second_pr == 775000.0
+
+def test_smartphone(first_sm):
+    assert first_sm.name == "Samsung"
+    assert first_sm.description == "Смартфон"
+    assert first_sm.price == 50000.0
+    assert first_sm.quantity == 2
+    assert first_sm.efficiency == 5
+    assert first_sm.model == "JA-700"
+    assert first_sm.memory == 8
+    assert first_sm.color == "gold"
+
+def test_LawnGrass(first_lg):
+    assert first_lg.name == "Газонная трава"
+    assert first_lg.description == "Быстрорастущая"
+    assert first_lg.price == 500.0
+    assert first_lg.quantity == 20
+    assert first_lg.country == "Россия"
+    assert first_lg.germination_period == "7 дней"
+    assert first_lg.color == "зелёный"
+
+def test_add_with_if_product_wrong(first_sm, first_lg):
+    with pytest.raises(TypeError):
+        first_sm + first_lg
+
+def test_add_with_if_product_right(first_sm, second_sm):
+    assert first_sm + second_sm == 325000
+
+def test_add_with_if_category_wrong(first_ct):
+    with pytest.raises(TypeError):
+        first_ct.add_product(5)
+
+
+

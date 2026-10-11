@@ -38,7 +38,7 @@ class Product:
 class Smartphone(Product):
     """Класс для продукта - смартфон."""
 
-    def __init__(self, name: str, description: str, price: float, quantity: int, efficiency: str, model: str, memory: float, color: str):
+    def __init__(self, name: str, description: str, price: float, quantity: int, efficiency: int, model: str, memory: float, color: str):
         super().__init__(name, description, price, quantity)
         self.efficiency = efficiency
         self.model = model
