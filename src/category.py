@@ -18,8 +18,11 @@ class Category:
 
 
     def add_product(self, product: Product):
-        self.__products.append(product)
-        Category.product_count += 1
+        if not isinstance(product,Product):
+            raise TypeError("Можно добавлять только объекты Product или его наследников")
+        else:
+            self.__products.append(product)
+            Category.product_count += 1
 
 
     @property
