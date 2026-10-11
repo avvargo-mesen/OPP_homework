@@ -34,9 +34,8 @@ def test_pr(first_pr):
 def test_ct(first_ct):
     assert first_ct.name == "Электроника"
     assert first_ct.description == "Ноутбуки и аксессуары"
-    assert len(first_ct.products) == 2
-    assert first_ct.products[0].name == "Ноутбук"
-    assert first_ct.products[1].name == "Мышь"
+    assert "Ноутбук" in first_ct.products
+    assert "Мышь" in first_ct.products
 
 
 def test_count_ct(first_ct):
@@ -45,3 +44,36 @@ def test_count_ct(first_ct):
 
 def test_count_pr(first_ct):
     assert Category.product_count == 2
+
+
+def test_add_product(first_ct):
+    pr_3 = Product("Клавиатура", "Механическая", 5000.0, 3)
+    first_ct.add_product(pr_3)
+    assert Category.product_count == 3
+    assert "Клавиатура" in first_ct.products
+
+def test_products(first_ct):
+    assert type(first_ct.products) == str
+    assert "Ноутбук" in first_ct.products
+    assert "Мышь" in first_ct.products
+
+def test_new_product():
+    dict_1 = {"name":"Клавиатура", "description": "Механическая", "price": 5000.0, "quantity":3}
+    product = Product.new_product(dict_1)
+    assert isinstance(product, Product)
+    assert product.name == "Клавиатура"
+    assert product.description == "Механическая"
+    assert product.price == 5000.0
+    assert product.quantity == 3
+
+def test_price(first_pr):
+    assert first_pr.price == 150000.0
+
+def test_set_price_right(first_pr):
+    first_pr.price = 100
+    assert first_pr.price == 100
+
+def test_set_price_wrong(first_pr):
+    first_pr.price = -50
+    assert first_pr.price == 150000.0
+
