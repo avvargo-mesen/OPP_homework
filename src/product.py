@@ -10,7 +10,7 @@ class Product:
 
     @classmethod
     def new_product(cls, one_product: dict) -> "Product":
-        """Добавляет информацию о новом продукте"""
+        """класс-метод,  принимает словарь с данными товара и возвращает объект Product, созданный из этого словаря"""
         product = cls(**one_product)
         return product
 
