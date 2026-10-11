@@ -30,3 +30,9 @@ class Category:
 
         return "".join(new_products_list)
 
+    def __str__(self):
+        total = 0
+        for product in self.__products:
+            total += product.quantity
+        return f"{self.name}, количество продуктов: {total} шт."
+
