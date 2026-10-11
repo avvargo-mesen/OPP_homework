@@ -83,5 +83,5 @@ def test_str_product(first_pr):
 def test_str_category(first_ct):
     assert str(first_ct) == "Электроника, количество продуктов: 15 шт."
 
-def test_add_product(first_pr,second_pr):
+def test_add(first_pr,second_pr):
     assert first_pr + second_pr == 775000.0
