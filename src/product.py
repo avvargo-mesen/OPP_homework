@@ -5,11 +5,27 @@ class Product:
 
         self.name = name
         self.description = description
-        self.price = price
+        self.__price = price
         self.quantity = quantity
 
     @classmethod
     def new_product(cls, one_product: dict) -> "Product":
+        """Добавляет информацию о новом продукте"""
         product = cls(**one_product)
         return product
+
+    @property
+    def price(self) -> float:
+        new_price = self.__price
+        return new_price
+
+    @price.setter
+    def price(self, new_price: float) -> None:
+        if new_price <= 0:
+            print("Цена не должна быть нулевая или отрицательная")
+        else:
+            self.__price = new_price
+
+
+
 
