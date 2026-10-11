@@ -77,3 +77,11 @@ def test_set_price_wrong(first_pr):
     first_pr.price = -50
     assert first_pr.price == 150000.0
 
+def test_str_product(first_pr):
+    assert str(first_pr) == "Ноутбук, 150000.0 руб. Остаток: 5 шт."
+
+def test_str_category(first_ct):
+    assert str(first_ct) == "Электроника, количество продуктов: 15 шт."
+
+def test_add_product(first_pr,second_pr):
+    assert first_pr + second_pr == 775000.0
