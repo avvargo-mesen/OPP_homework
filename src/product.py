@@ -1,18 +1,12 @@
-class Product:
-    """Класс для продукта."""
+from abc import ABC, abstractmethod
 
-    def __init__(self, name: str, description: str, price: float, quantity: int):
+class BaseProduct(ABC):
 
+    def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
-
-    @classmethod
-    def new_product(cls, one_product: dict) -> "Product":
-        """класс-метод,  принимает словарь с данными товара и возвращает объект Product, созданный из этого словаря"""
-        product = cls(**one_product)
-        return product
 
     @property
     def price(self) -> float:
@@ -25,6 +19,23 @@ class Product:
             print("Цена не должна быть нулевая или отрицательная")
         else:
             self.__price = new_price
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+
+class Product(BaseProduct):
+    """Класс для продукта."""
+
+    def __init__(self, name: str, description: str, price: float, quantity: int):
+        super().__init__(name, description, price, quantity)
+
+    @classmethod
+    def new_product(cls, one_product: dict) -> "Product":
+        """класс-метод,  принимает словарь с данными товара и возвращает объект Product, созданный из этого словаря"""
+        product = cls(**one_product)
+        return product
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
