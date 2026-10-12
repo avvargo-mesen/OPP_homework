@@ -24,8 +24,13 @@ class BaseProduct(ABC):
     def __str__(self):
         pass
 
+class PrintMixin:
 
-class Product(BaseProduct):
+    def __init__(self, *args, **kwargs):
+        print(f"{self.__class__.__name__}{args}")
+        super().__init__(*args, **kwargs)
+
+class Product(PrintMixin, BaseProduct):
     """Класс для продукта."""
 
     def __init__(self, name: str, description: str, price: float, quantity: int):
@@ -63,6 +68,7 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
+
 
 
 
