@@ -1,6 +1,7 @@
 from src.product import Product
 from src.product import Smartphone
 from src.product import LawnGrass
+from src.product import BaseProduct
 from src.category import Category
 import pytest
 
@@ -129,6 +130,17 @@ def test_add_with_if_product_right(first_sm, second_sm):
 def test_add_with_if_category_wrong(first_ct):
     with pytest.raises(TypeError):
         first_ct.add_product(5)
+
+def test_BaseProduct():
+    with pytest.raises(TypeError):
+        BaseProduct("Продукт", "Описание", 100, 5)
+
+def test_PrintMixin(capsys):
+    Product("Продукт", "Описание", 100, 5)
+    result = capsys.readouterr()
+    assert "Product" in result.out
+
+
 
 
 
