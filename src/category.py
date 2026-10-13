@@ -40,3 +40,15 @@ class Category:
             total += product.quantity
         return f"{self.name}, количество продуктов: {total} шт."
 
+    def average_price(self):
+        sum_of_prices = 0
+        for product in self.__products:
+            sum_of_prices += product.price
+        try:
+            return sum_of_prices/ len(self.__products)
+        except:
+             return 0
+
+
+
+
