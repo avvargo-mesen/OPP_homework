@@ -3,10 +3,14 @@ from abc import ABC, abstractmethod
 class BaseProduct(ABC):
 
     def __init__(self, name, description, price, quantity):
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
+
+
 
     @property
     def price(self) -> float:
@@ -68,10 +72,3 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
-
-
-
-
-
-
-

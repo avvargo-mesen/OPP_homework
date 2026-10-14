@@ -27,6 +27,10 @@ def first_ct(first_pr, second_pr):
     return Category("Электроника", "Ноутбуки и аксессуары", [first_pr, second_pr])
 
 @pytest.fixture
+def second_ct():
+    return Category("Пусто", "Пусто", [])
+
+@pytest.fixture
 def first_sm():
     return Smartphone("Samsung", "Смартфон", 50000.0, 2, 5, "JA-700", 8, "gold")
 
@@ -139,6 +143,18 @@ def test_PrintMixin(capsys):
     Product("Продукт", "Описание", 100, 5)
     result = capsys.readouterr()
     assert "Product" in result.out
+
+def test_ValueError():
+    with pytest.raises(ValueError):
+        Product("Мышь", "Беспроводная мышь", 2500.0, 0)
+
+def test_average_price(first_ct):
+    assert first_ct.average_price() == 76250.0
+
+def test_average_price_empty(second_ct):
+    assert second_ct.average_price() == 0
+
+
 
 
 
